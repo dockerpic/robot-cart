@@ -1,0 +1,27 @@
+version: '3'
+services:
+  redis:
+    image: redis:6.2-alpine
+    networks:
+      - robot-cart
+    ports:
+      - 6379:6379
+    logging: &logging
+      driver: "json-file"
+      options:
+        max-size: "25m"
+        max-file: "2"
+  cart:
+    build: .
+    image: robot-cart
+    depends_on:
+      - redis
+    networks:
+      - robot-cart
+    ports:
+      - 30000:3000
+    logging:
+      <<: *logging
+
+networks:
+  robot-cart:

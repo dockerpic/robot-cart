@@ -1,0 +1,29 @@
+version: '3'
+services:
+  redis:
+    image: redis:6.2-alpine
+    networks:
+      - robot-cart
+    logging: &logging
+      driver: "json-file"
+      options:
+        max-size: "25m"
+        max-file: "2"
+  cart:
+    build:
+      context: cart
+    image: ${REPO}/rs-cart:${TAG}
+    depends_on:
+      - redis
+    networks:
+      - robot-cart
+    healthcheck:
+      test: [ "CMD", "curl", "-H", "X-INSTANA-SYNTHETIC: 1", "-f", "http://localhost:8080/health" ]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    logging:
+      <<: *logging
+
+networks:
+  robot-cart:

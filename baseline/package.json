@@ -1,0 +1,17 @@
+{
+  "name": "baseline",
+  "version": "1.0.0",
+  "description": "cart try",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hme",
+  "license": "Apache-2.0",
+  "dependencies": {
+      "express": "^4.15.4",
+      "redis": "^2.8.0",
+      "express-session": "^1.18.0",
+      "connect-redis": "^7.1.1"
+  }
+}
