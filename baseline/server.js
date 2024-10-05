@@ -8,7 +8,8 @@ import RedisStore from "connect-redis";
 import { createClient } from "redis";
 
 // Create Redis client
-const redisClient = createClient();
+const redisClient = createClient( {host: 'redis',
+    port: 6379});
 redisClient.on("error", function(error) {
     console.error(error);
 });

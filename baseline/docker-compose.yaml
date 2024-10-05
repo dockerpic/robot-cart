@@ -19,7 +19,9 @@ services:
     networks:
       - robot-cart
     ports:
-      - 30000:3000
+      - 30005:3000
+    environment:
+      - REDIS_HOST=redis
     logging:
       <<: *logging
 
